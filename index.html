@@ -6,10 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
+    <div class="top">
+        <div class="selections" id="player"><span>YOU</span><span class="score">0</span></div>
+        <div class="selections" id="computer"><span>COM</span><span class="score">0</span></div>
+    </div>
+    <div class="bottom">
+        <ul id="choose-ul">
+            <button id="rock"><span>R</span></button>
+            <button id="paper"><span>P</span></button>
+            <button id="scissor"><span>S</span></button>
+        </ul>
+        <span id="win-text">SELECT ONE TO PLAY!</span>
+    </div>
 </body>
 
 </html>

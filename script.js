@@ -61,12 +61,6 @@ function playGame() {
     let computer = "";
     let player = "";
 
-    for (let i = 0; i < roundLenght; i++) {
-        computer = getComputerChoice();
-        player = getPlayerChoice();
-        playRound(computer, player);
-    }
-
     if (playerScore > computerScore) {
         console.log("Player won the game!");
     } else if (computerScore > playerScore) {
