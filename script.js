@@ -14,7 +14,7 @@ function getComputerChoice() {
     }
 };
 
-function play_round(player_choice) {
+async function play_round(player_choice) {
     function print_win(player, computer) {
         result_display.textContent = (`You won! ${player}, beats ${computer}!`);
         playerScore += 1;
@@ -35,17 +35,26 @@ function play_round(player_choice) {
                 return "scissor";
         }
     }
-    let com_choice = getComputerChoice();
-    console.log(com_choice);
-    let difference = (((player_choice - com_choice) % 3) + 3) % 3;
+    if (check_win_condition(playerScore, computerScore)) {
+        let com_choice = getComputerChoice();
+        console.log(com_choice);
+        let difference = (((player_choice - com_choice) % 3) + 3) % 3;
 
-    if (difference == 0) {
-        result_display.textContent = ("Tie");
-    } else if (difference == 1) {
-        print_win(return_name_move(player_choice), return_name_move(com_choice));
-    } else if (difference > 1) {
-        print_lose(return_name_move(player_choice), return_name_move(com_choice));
+        if (difference == 0) {
+            result_display.textContent = ("Tie");
+        } else if (difference == 1) {
+            print_win(return_name_move(player_choice), return_name_move(com_choice));
+        } else if (difference > 1) {
+            print_lose(return_name_move(player_choice), return_name_move(com_choice));
+        }
+    } if (check_win_condition(playerScore, computerScore) === false) {
+        await wait(1000);
+        playerScore = 0;
+        computerScore = 0;
+        document.querySelector("#player > .score").textContent = playerScore;
+        document.querySelector("#computer > .score").textContent = computerScore;
     }
+
 }
 
 function check_win_condition(p_score, c_score) {
@@ -59,8 +68,8 @@ function check_win_condition(p_score, c_score) {
 let button_array = document.querySelectorAll("#choose-ul > button");
 button_array.forEach((button, index) => {
     button.addEventListener("click", e => {
-        if (check_win_condition(playerScore, computerScore)) {
-            play_round(index + 1);
-        }
-    })
+        play_round(index + 1);
+    });
 });
+
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
